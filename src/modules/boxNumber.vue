@@ -1,0 +1,173 @@
+<template>
+  <div
+    class="boxNumber"
+    v-on:click="onClickEditNumber"
+  >
+    <div class="boxNumber__prefixArea">
+      <div class="boxNumber__container">
+        <div class="boxNumber__number">
+          <div class="boxNumber__rotationNumber">
+            <div class="boxNumber__listNumber">
+              <span><span>V</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="boxNumber__numberArea">
+      <div class="boxNumber__container">
+        <div class="boxNumber__number">
+          <div class="boxNumber__rotationNumber">
+            <div class="boxNumber__listNumber">
+              <span><span>0</span></span>
+              <span><span>1</span></span>
+              <span><span>2</span></span>
+              <span><span>3</span></span>
+              <span><span>4</span></span>
+              <span><span>5</span></span>
+              <span><span>6</span></span>
+              <span><span>7</span></span>
+              <span><span>8</span></span>
+              <span><span>9</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="boxNumber__number">
+          <div class="boxNumber__rotationNumber">
+            <div class="boxNumber__listNumber">
+              <span><span>0</span></span>
+              <span><span>1</span></span>
+              <span><span>2</span></span>
+              <span><span>3</span></span>
+              <span><span>4</span></span>
+              <span><span>5</span></span>
+              <span><span>6</span></span>
+              <span><span>7</span></span>
+              <span><span>8</span></span>
+              <span><span>9</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState, mapActions } from 'vuex';
+
+export default {
+  name: "BoxNumber",
+
+  computed: {
+    
+  },
+
+  methods: {
+    ...mapActions('overlay', [
+      'openOverlay'
+    ]),
+
+    ...mapActions('number', [
+      'updateIsEditNumber',
+    ]),
+
+    onClickEditNumber () {
+      this.openOverlay(true);
+      this.updateIsEditNumber(true);
+    }
+  },
+}
+</script>
+
+<style lang="scss">
+.boxNumber {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-40%);
+  transition: all .3s linear;
+  z-index: 10;
+  cursor: pointer;
+
+  &__prefixArea {
+    display: none;
+    margin-right: 25px;
+  }
+
+  &__prefixArea,
+  &__numberArea {
+    display: flex;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    padding: 17px;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+    background: linear-gradient(90deg, #b8c139 0, #7f8c08);
+  }
+
+  &__number {
+    width: 170px;
+    height: 250px;
+    border: 3px solid #ffffff;
+    border-right: none;
+    background: linear-gradient(180deg, #b8c139 0, #7f8c08);
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 75%);
+    transition: filter 2s linear;
+    position: relative;
+    overflow: hidden;
+
+    &:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-right: 3px solid #ffffff;
+    }
+  }
+
+  &__rotationNumber {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  &__listNumber {
+    font-size: 170px;
+    line-height: 250px;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    transform: translate(-50%,-50%) rotateY(-90deg);
+    transition: all .2s linear;
+    transform-style: preserve-3d;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    & > span {
+      width: 0;
+      height: 0;
+      position: absolute;
+      transform-style: preserve-3d;
+
+      & > span {
+        display: block;
+        width: 164px;
+        height: 244px;
+        background: linear-gradient(180deg,#b8c139 0,#7f8c08);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%) rotateY(90deg);
+      }
+    }
+  }
+}
+</style>

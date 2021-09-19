@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Open Sans';
+  font-size: 16px;
+  line-height: auto;
+}
+
+.rs-control {
+  margin-left: 5px;
+  margin-right: 5px;
+
+  .rs-edit {
+    display: none;
+  }
+
+  .rs-container {
+    border-radius: 100%;
+    border: solid 1px #19bdb9;
+  }
+
+  .rs-handle {
+    box-shadow: none;
+    background-color: #19bdb9;
+  }
+}

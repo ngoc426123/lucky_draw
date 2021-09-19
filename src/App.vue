@@ -1,28 +1,46 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container">
+    <Background />
+    <BoxTitle />
+    <BoxNumber />
+    <!-- POPUP -->
+    <Overlay />
+    <BoxEditTitle />
+    <BoxEditNumber />
+    <BoxEditBackground />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Background from "./modules/background.vue";
+import BoxEditBackground from "./modules/boxEditBackground.vue";
+import BoxTitle from "./modules/boxTitle.vue";
+import BoxEditTitle from "./modules/boxEditTitle.vue";
+import BoxNumber from "./modules/boxNumber.vue";
+import BoxEditNumber from "./modules/boxEditNumber.vue";
+import Overlay from "./modules/overlay.vue";
 
 export default {
   name: "App",
+
   components: {
-    HelloWorld,
+    Background,
+    BoxEditBackground,
+    BoxTitle,
+    BoxEditTitle,
+    BoxNumber,
+    BoxEditNumber,
+    Overlay
   },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss" scoped>
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 </style>

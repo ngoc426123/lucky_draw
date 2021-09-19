@@ -1,0 +1,29 @@
+.box {
+  background-color: #ffffff;
+  box-shadow: 12px 12px 12px rgba(0,0,0,0.4);
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #19bdb9;
+    padding: 10px 30px;
+  }
+
+  &__content {
+    padding: 35px 30px;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    border-top: solid 1px #cacaca;
+
+    &.in-right {
+      justify-content: flex-end;
+    }
+  }
+}

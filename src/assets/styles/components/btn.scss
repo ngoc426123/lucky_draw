@@ -1,0 +1,24 @@
+.btn {
+  display: inline-block;
+  font-size: 16px;
+  background-color: #ffffff;
+  border: solid 1px #cacaca;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 3px 3px 4px rgba(0,0,0,.25);
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+
+  &-solid {
+    color: #ffffff;
+    background-color: #19bdb9;
+    border-color: #139997;
+
+    &:hover {
+      background-color: #139997;
+    }
+  }
+}
