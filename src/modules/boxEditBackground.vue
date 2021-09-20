@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="boxEditBackground box"
-    v-if="is_edit_background"
-  >
+  <div class="boxEditBackground box" v-if="is_edit_background">
     <div class="box__title">Edit Background</div>
     <div class="box__content">
       <div class="form horizontal">
@@ -22,6 +19,7 @@
                 v-model="setter_second_color">
               <RoundSlider
                 v-model="setter_angle"
+                max="360"
                 start-angle="0"
                 end-angle="+360"
                 line-cap="round"
@@ -47,7 +45,7 @@
       </div>
     </div>
     <div class="box__footer in-right">
-      <button class="btn btn-solid" v-on:click="onClickUpdateBackground">Accept</button>
+      <Button type="solid" v-on:click="onClickUpdateBackground">Accept</Button>
     </div>
   </div>
 </template>
@@ -55,12 +53,14 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import RoundSlider from 'vue-round-slider'
+import Button from '../components/button.vue'
 
 export default {
   name: "BoxEditBackground",
 
   components: {
     RoundSlider,
+    Button
   },
 
   computed: {

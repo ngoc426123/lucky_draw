@@ -1,41 +1,25 @@
 <template>
-  <div class="container">
-    <Background />
-    <BoxTitle />
-    <BoxNumber />
-    <!-- POPUP -->
-    <Overlay />
-    <BoxEditTitle />
-    <BoxEditNumber />
-    <BoxEditBackground />
+  <div>
+    <EditScreen />
+    <LiveScreen />
   </div>
 </template>
 
 <script>
-import Background from "./modules/background.vue";
-import BoxEditBackground from "./modules/boxEditBackground.vue";
-import BoxTitle from "./modules/boxTitle.vue";
-import BoxEditTitle from "./modules/boxEditTitle.vue";
-import BoxNumber from "./modules/boxNumber.vue";
-import BoxEditNumber from "./modules/boxEditNumber.vue";
-import Overlay from "./modules/overlay.vue";
+import EditScreen from "./screens/editScreen.vue";
+import LiveScreen from "./screens/liveScreen.vue";
 
 export default {
   name: "App",
 
   components: {
-    Background,
-    BoxEditBackground,
-    BoxTitle,
-    BoxEditTitle,
-    BoxNumber,
-    BoxEditNumber,
-    Overlay
+    EditScreen,
+    LiveScreen,
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .container {
   position: absolute;
   top: 0;

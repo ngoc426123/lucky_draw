@@ -7,6 +7,7 @@ import background from './modules/background'
 import overlay from './modules/overlay'
 import title from './modules/title'
 import number from './modules/number'
+import screen from './modules/screen'
 
 Vue.use(Vuex);
 
@@ -14,7 +15,8 @@ const modules = {
   background,
   overlay,
   title,
-  number
+  number,
+  screen,
 }
 
 for (let mod in modules) {

@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="boxTitle"
-    v-on:click="onClickEditTitle"
-  >
+  <div class="boxTitle" v-on:click="onClickEditTitle">
     <div
       class="boxTitle__subTitle"
       v-text="text_sub.text"
@@ -39,6 +36,10 @@ export default {
       'text_sub',
       'text_title',
     ]),
+
+    ...mapState('screen', [
+      'is_edit_program',
+    ]),
   },
 
   methods: {
@@ -51,6 +52,10 @@ export default {
     ]),
 
     onClickEditTitle () {
+      if ( !this.is_edit_program ) {
+        return;
+      }
+
       this.openOverlay(true);
       this.updateIsEditTitle(true);
     }
@@ -66,8 +71,11 @@ export default {
   top: 60px;
   left: 50%;
   transform: translateX(-50%);
-  cursor: pointer;
   z-index: 2;
+
+  .EditLive & {
+    cursor: pointer;
+  }
   
   &__title {
     font-weight: bold;

@@ -20,6 +20,10 @@ export default {
       'background'
     ]),
 
+    ...mapState('screen', [
+      'is_edit_program',
+    ]),
+
     bgComputed: ({ first_color, second_color, angle, background }) => {
       return !background ? `linear-gradient(${angle}deg, ${second_color} 0%, ${first_color} 100%)` : `url(${background})`;
     }
@@ -35,6 +39,10 @@ export default {
     ]),
 
     onClickEditBackground () {
+      if ( !this.is_edit_program ) {
+        return;
+      }
+
       this.openOverlay(true);
       this.updateIsEditBackground(true);
     }
@@ -49,10 +57,13 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  cursor: pointer;
   background-position: center;
   background-size: auto;
   background-repeat: no-repeat;
   z-index: 1;
+
+  .EditLive & {
+    cursor: pointer;
+  }
 }
 </style>

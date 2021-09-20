@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="boxEditTitle box"
-    v-if="is_edit_title"
-  >
+  <div class="boxEditTitle box" v-if="is_edit_title">
     <div class="box__title">Edit Title</div>
     <div class="box__content">
       <div class="form horizontal">
@@ -95,24 +92,32 @@
       </div>
     </div>
     <div class="box__footer in-right">
-      <button class="btn btn-solid" v-on:click="onClickUpdateTitle">Accept</button>
+      <Button type="solid" v-on:click="onClickUpdateTitle">Accept</Button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import Button from '../components/button.vue'
 
 export default {
   name: 'BoxEditTitle',
 
+  components: {
+    Button
+  },
+
   computed: {
+    ...mapState([
+      'list_font_style',
+      'list_font_weight',
+    ]),
+
     ...mapState('title', [
       'is_edit_title',
       'text_sub',
       'text_title',
-      'list_font_style',
-      'list_font_weight',
       'list_font_size',
       'start_font_size',
       'step_font_size',

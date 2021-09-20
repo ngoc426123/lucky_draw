@@ -6,6 +6,31 @@
 // OPEN SANS
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
+//MN ICON
+@font-face {
+  font-family: 'mnIcon';
+  src:  url('../fonts/mnIcon/mnIcon.eot?qxlj2c');
+  src:  url('../fonts/mnIcon/mnIcon.eot?qxlj2c#iefix') format('embedded-opentype'),
+    url('../fonts/mnIcon/mnIcon.ttf?qxlj2c') format('truetype'),
+    url('../fonts/mnIcon/mnIcon.woff?qxlj2c') format('woff'),
+    url('../fonts/mnIcon/mnIcon.svg?qxlj2c#mnIcon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'mnIcon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
 // ANTON
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
@@ -18,3 +43,17 @@
 // PATTAYA
 @import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
 
+// ALFA SLAB ONE
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+//SIGMAR ONE
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+
+// BEVAN
+@import url('https://fonts.googleapis.com/css2?family=Bevan&display=swap');
+
+// CALISTOGA
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+
+// SAIRA STENCIL ONE
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');

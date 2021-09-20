@@ -9,11 +9,37 @@
     font-weight: bold;
     color: #ffffff;
     background-color: #19bdb9;
-    padding: 10px 30px;
+    padding: 10px 20px;
   }
 
   &__content {
-    padding: 35px 30px;
+    padding: 35px 20px;
+
+    &.no-padding {
+      padding: 0;
+    }
+
+    &--region {
+      padding: 35px 20px;
+      background-color: #eaeaea;
+      border-bottom: 1px solid #cacaca;
+    }
+
+    &--row {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: nowrap;
+    }
+
+    &--col {
+      width: 100%;
+      padding: 35px 20px;
+      border-right: 1px solid #cacaca;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
   }
 
   &__footer {

@@ -1,66 +1,43 @@
 <template>
-  <div
-    class="boxNumber"
+  <div class="boxNumber"
+    :style="{
+      fontSize: '50px',
+      lineHeight: '60px',
+      color: number.color,
+    }"
     v-on:click="onClickEditNumber"
   >
-    <div class="boxNumber__prefixArea">
-      <div class="boxNumber__container">
-        <div class="boxNumber__number">
-          <div class="boxNumber__rotationNumber">
-            <div class="boxNumber__listNumber">
-              <span><span>V</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="boxNumber__prefixArea" v-if="prefix_number">
+      <PrefixNumber/>
     </div>
     <div class="boxNumber__numberArea">
-      <div class="boxNumber__container">
-        <div class="boxNumber__number">
-          <div class="boxNumber__rotationNumber">
-            <div class="boxNumber__listNumber">
-              <span><span>0</span></span>
-              <span><span>1</span></span>
-              <span><span>2</span></span>
-              <span><span>3</span></span>
-              <span><span>4</span></span>
-              <span><span>5</span></span>
-              <span><span>6</span></span>
-              <span><span>7</span></span>
-              <span><span>8</span></span>
-              <span><span>9</span></span>
-            </div>
-          </div>
-        </div>
-        <div class="boxNumber__number">
-          <div class="boxNumber__rotationNumber">
-            <div class="boxNumber__listNumber">
-              <span><span>0</span></span>
-              <span><span>1</span></span>
-              <span><span>2</span></span>
-              <span><span>3</span></span>
-              <span><span>4</span></span>
-              <span><span>5</span></span>
-              <span><span>6</span></span>
-              <span><span>7</span></span>
-              <span><span>8</span></span>
-              <span><span>9</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Number />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex'
+import Number from './numberEditing.vue'
+import PrefixNumber from './prefixNumberEditing.vue'
 
 export default {
   name: "BoxNumber",
 
+  components: {
+    Number,
+    PrefixNumber
+  },
+
   computed: {
-    
+    ...mapState('number', [
+      'number',
+      'prefix_number',
+    ]),
+
+    ...mapState('screen', [
+      'is_edit_program',
+    ]),
   },
 
   methods: {
@@ -73,6 +50,10 @@ export default {
     ]),
 
     onClickEditNumber () {
+      if ( !this.is_edit_program ) {
+        return;
+      }
+
       this.openOverlay(true);
       this.updateIsEditNumber(true);
     }
@@ -90,7 +71,10 @@ export default {
   transform: translate(-50%,-40%);
   transition: all .3s linear;
   z-index: 10;
-  cursor: pointer;
+  
+  .EditLive & {
+    cursor: pointer;
+  }
 
   &__prefixArea {
     display: none;
@@ -138,11 +122,7 @@ export default {
   }
 
   &__listNumber {
-    font-size: 170px;
-    line-height: 250px;
     text-align: center;
-    font-weight: 700;
-    color: #fff;
     text-transform: uppercase;
     transform: translate(-50%,-50%) rotateY(-90deg);
     transition: all .2s linear;
