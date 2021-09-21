@@ -11,10 +11,7 @@
       :key="index.key"
       :style="{
         background: `linear-gradient(${number.angle}deg, ${number.first_color} 0, ${number.second_color})`,
-        borderTop: `${number.border_style} ${number.border_width}px ${number.border_color}`,
-        borderBottom: `${number.border_style} ${number.border_width}px ${number.border_color}`,
-        borderLeft: `${number.border_style} ${number.border_width}px ${number.border_color}`,
-        borderRight: index === number_slot - 1 && `${number.border_style} ${number.border_width}px ${number.border_color}`,
+        border: `${number.border_style} ${number.border_width}px ${number.border_color}`,
       }"
     >
       <div class="boxNumber__rotationNumber">

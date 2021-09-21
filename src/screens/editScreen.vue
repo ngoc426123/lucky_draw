@@ -58,12 +58,25 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'updateIsTransition'
+    ]),
+
     ...mapActions('screen', [
       'updateIsEditProgram'
     ]),
 
-    onClickGoLive () {
+    ...mapActions('number', [
+      'setupNumber'
+    ]),
+
+    async onClickGoLive () {
+      this.updateIsTransition(true);
+      await new Promise((reslove, reject) => setTimeout(reslove, 200));
+      this.setupNumber();
       this.updateIsEditProgram(false);
+      await new Promise((reslove, reject) => setTimeout(reslove, 800));
+      this.updateIsTransition(false);
     },
   }
 };
@@ -100,11 +113,10 @@ export default {
 }
 
 .screen {
-  transition: transform 0.4s ease;
-  transform: translateX(-100%);
+  display: none;
 
   &.EditLive {
-    transform: translateX(0);
+    display: block;
   }
 }
 </style>

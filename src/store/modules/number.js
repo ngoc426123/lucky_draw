@@ -33,11 +33,12 @@ export default {
     // NUMBER
     prefix_number: '',
     start_number: 1,
-    end_number: 1000,
+    end_number: 100,
     max_number: 999999,
     array_offset_number: [0, 36, 72, 108, 144, 180, 216, 252, 288, 324],
     array_number: [],
-    running: false,
+    current_number: '',
+    rolling: false,
   },
 
   mutations: {
@@ -47,18 +48,58 @@ export default {
     prefixNumber: (vm, data) => (vm.prefix_number = data),
     startNumber: (vm, data) => (vm.start_number = data),
     endNumber: (vm, data) => (vm.end_number = data),
-    arrayNumber: (vm, data) => (vm.array_number = data),
-    running: (vm, data) => (vm.running = data),
+    arrayNumber: (vm, data) => (vm.array_number = data.data),
+    currentNumber: (vm, data) => (vm.current_number = data.data),
+    rolling: (vm, data) => (vm.rolling = data),
   },
 
   actions: {
-    updateIsEditNumber: ({ commit }, data) => commit("isEditNumber", data),
-    updateListFontSize: ({ commit }, data) => commit("listFontSize", data),
-    updateListLineHeight: ({ commit }, data) => commit("listLineHeight", data),
-    updatePrefixNumber: ({ commit }, data) => commit("prefixNumber", data),
-    updateStartNumber: ({ commit }, data) => commit("startNumber", data),
-    updateEndNumber: ({ commit }, data) => commit("endNumber", data),
-    updateArrayNumber: ({ commit }, data) => commit("arrayNumber", data),
-    updateRunning: ({ commit }, data) => commit("running", data),
+    // FUNCTION 4 RUN GAME
+    setupNumber: ({ dispatch, state }) => {
+      const {
+        start_number,
+        end_number
+      } = state;
+      const range = Array.from({ length: (end_number - start_number) / 1 + 1}, (_, i) => start_number + (i * 1));
+
+      dispatch('updateArrayNumber', range);
+    },
+
+    rollNumber: ({ dispatch }, data) => {
+      data && dispatch('updateCurrentNumber', 0);
+      dispatch('updateRolling', data);
+    },
+
+    getNumber: ({ dispatch, state }) => {
+      const { array_number, end_number } = state;
+      const numRandom = array_number[parseInt(Math.random() * (array_number.length - 0) + 0)];
+      const idxRandom = array_number.indexOf(numRandom);
+      let finalNumber = numRandom ? numRandom.toString(): '';
+
+      if ( !numRandom ) {
+        return;
+      }
+
+      array_number.splice(idxRandom, 1);
+      while (finalNumber.length < end_number.toString().length) finalNumber = '0' + finalNumber;
+
+      dispatch('updateArrayNumber', array_number);
+      dispatch('updateCurrentNumber', finalNumber);
+      console.log(finalNumber);
+    },
+
+    // FUNCTION GAME HANDLE
+    
+
+    // UPDATE FUNCTION
+    updateIsEditNumber: ({ commit }, data) => commit('isEditNumber', data),
+    updateListFontSize: ({ commit }, data) => commit('listFontSize', data),
+    updateListLineHeight: ({ commit }, data) => commit('listLineHeight', data),
+    updatePrefixNumber: ({ commit }, data) => commit('prefixNumber', data),
+    updateStartNumber: ({ commit }, data) => commit('startNumber', data),
+    updateEndNumber: ({ commit }, data) => commit('endNumber', data),
+    updateArrayNumber: ({ commit }, data) => commit('arrayNumber', { data }),
+    updateCurrentNumber: ({ commit }, data) => commit('currentNumber', { data }),
+    updateRolling: ({ commit }, data) => commit('rolling', data),
   },
 }

@@ -6,15 +6,13 @@
       border: `${container.border_style} ${container.border_width}px ${container.border_color}`,
     }"
   >
-    <div class="boxNumber__number"
+    <div
+      class="boxNumber__number"
       v-for="(item, index) in number_slot"
       :key="index.key"
       :style="{
         background: `linear-gradient(${number.angle}deg, ${number.first_color} 0, ${number.second_color})`,
-        borderTop: `${number.border_style} ${number.border_width}px ${number.border_color}`,
-        borderBottom: `${number.border_style} ${number.border_width}px ${number.border_color}`,
-        borderLeft: `${number.border_style} ${number.border_width}px ${number.border_color}`,
-        borderRight: index === number_slot - 1 && `${number.border_style} ${number.border_width}px ${number.border_color}`,
+        border: `${number.border_style} ${number.border_width}px ${number.border_color}`,
       }"
     >
       <div class="boxNumber__rotationNumber">
@@ -44,12 +42,54 @@ export default {
       'container',
       'number',
       'end_number',
-      'max_number'
+      'max_number',
+      'current_number',
+      'rolling',
+      'array_offset_number'
     ]),
 
     number_slot: ({ end_number, max_number }) => end_number <= max_number ? end_number.toString().length : max_number.toString().length,
 
     number_list: () => Array.from(Array(10).keys()),
   },
+
+  methods: {
+    rollToNumber () {
+      const vm = this;
+      const number = vm.$el.getElementsByClassName('boxNumber__number');
+
+      number.forEach((eleNumber, idx) => {
+        const eleRotation = eleNumber.getElementsByClassName('boxNumber__rotationNumber');
+        const index = vm.current_number[idx];
+        const angle = vm.array_offset_number[index];
+        const posEgde = angle - 400;
+        const pos = angle;
+        const delay = (vm.end_number.toString().length - idx) * 700;
+
+        setTimeout(() => {
+          eleNumber.classList.remove('rolling');
+          eleRotation[0].style.transform = `rotateX(${posEgde}deg)`;
+
+          setTimeout(() => {
+            eleRotation[0].style.transition = 'all 1.8s ease-out';
+            eleRotation[0].style.transform = `rotateX(${pos}deg)`;
+          }, 30);
+        }, delay);
+      });
+    },
+  },
+
+  watch: {
+    rolling (value) {
+      const number = this.$el.getElementsByClassName('boxNumber__number');
+
+      value && number.forEach(item => item.classList.add('rolling'));
+      !value && number.forEach(item => item.getElementsByClassName('boxNumber__rotationNumber')[0].removeAttribute('style'));
+    },
+
+    current_number (value) {
+      value !== 0 && this.rollToNumber();
+    }
+  }
 }
 </script>

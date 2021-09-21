@@ -1,6 +1,7 @@
 export default {
   state: {
     is_customsize: false,
+    is_transition: false,
 
     // STYLE
     list_border_style: ["solid", "dashed", "dotted", "double", "groove", "none"],
@@ -10,9 +11,11 @@ export default {
 
   mutations: {
     isCustomsize: (vm, data) => (vm.is_customsize = data),
+    isTransition: (vm, data) => (vm.is_transition = data),
   },
 
   actions: {
     updateIsCustomsize: ({ commit }, data) => commit("isCustomsize", data),
+    updateIsTransition: ({ commit }, data) => commit("isTransition", data),
   },
 }

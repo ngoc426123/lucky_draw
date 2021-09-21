@@ -48,9 +48,17 @@ export default {
     ...mapActions('screen', [
       'updateIsEditProgram'
     ]),
+    
+    ...mapActions([
+      'updateIsTransition',
+    ]),
 
-    onClickGoEdit () {
+    async onClickGoEdit () {
+      this.updateIsTransition(true);
+      await new Promise((reslove, reject) => setTimeout(reslove, 200));
       this.updateIsEditProgram(true);
+      await new Promise((reslove, reject) => setTimeout(reslove, 800));
+      this.updateIsTransition(false);
     },
   }
 };
@@ -74,11 +82,10 @@ export default {
 }
 
 .screen {
-  transition: transform 0.4s ease;
-  transform: translateX(100%);
+  display: none;
 
   &.GoLive {
-    transform: translateX(0);
+    display: block;
   }
 }
 </style>

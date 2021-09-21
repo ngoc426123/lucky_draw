@@ -89,7 +89,7 @@ export default {
   &__container {
     display: flex;
     align-items: center;
-    padding: 17px;
+    padding: 20px;
     border-radius: 15px;
     border: 3px solid #ffffff;
     background: linear-gradient(90deg, #b8c139 0, #7f8c08);
@@ -98,18 +98,22 @@ export default {
   &__number {
     width: 170px;
     height: 250px;
+    margin-right: 20px;
     border: 3px solid #ffffff;
-    border-right: none;
-    background: linear-gradient(180deg, #b8c139 0, #7f8c08);
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 75%);
+    border-radius: 8px;
+    // background: linear-gradient(180deg, #b8c139 0, #7f8c08);
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.55);
     transition: filter 2s linear;
     position: relative;
     overflow: hidden;
 
     &:last-child {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
       border-right: 3px solid #ffffff;
+      margin-right: 0;
+    }
+
+    &.rolling {
+      filter: blur(5px);
     }
   }
 
@@ -119,6 +123,11 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform-style: preserve-3d;
+
+    .rolling & {
+      animation: ani-rolling 1s linear infinite;
+    }
   }
 
   &__listNumber {
@@ -137,6 +146,37 @@ export default {
       position: absolute;
       transform-style: preserve-3d;
 
+      &:nth-child(1) {
+        transform: rotate(0deg) translate(390px)
+      }
+      &:nth-child(2) {
+        transform: rotate(36deg) translate(390px)
+      }
+      &:nth-child(3) {
+        transform: rotate(72deg) translate(390px)
+      }
+      &:nth-child(4) {
+        transform: rotate(108deg) translate(390px)
+      }
+      &:nth-child(5) {
+        transform: rotate(144deg) translate(390px)
+      }
+      &:nth-child(6) {
+        transform: rotate(180deg) translate(390px)
+      }
+      &:nth-child(7) {
+        transform: rotate(216deg) translate(390px)
+      }
+      &:nth-child(8) {
+        transform: rotate(252deg) translate(390px)
+      }
+      &:nth-child(9) {
+        transform: rotate(288deg) translate(390px)
+      }
+      &:nth-child(10) {
+        transform: rotate(324deg) translate(390px)
+      }
+
       & > span {
         display: block;
         width: 164px;
@@ -148,6 +188,16 @@ export default {
         transform: translate(-50%,-50%) rotateY(90deg);
       }
     }
+  }
+}
+
+@keyframes ani-rolling {
+  0% {
+    transform: rotateX(0deg)
+  }
+
+  to {
+    transform: rotateX(1turn)
   }
 }
 </style>
