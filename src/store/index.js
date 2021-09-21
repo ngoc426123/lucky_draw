@@ -7,6 +7,7 @@ import background from './modules/background'
 import overlay from './modules/overlay'
 import title from './modules/title'
 import number from './modules/number'
+import dashbroad from './modules/dashbroad'
 import screen from './modules/screen'
 
 Vue.use(Vuex);
@@ -16,6 +17,7 @@ const modules = {
   overlay,
   title,
   number,
+  dashbroad,
   screen,
 }
 

@@ -54,28 +54,39 @@ export default {
   },
 
   methods: {
-    rollToNumber () {
+    ...mapActions('dashbroad', [
+      'addLuckyNumber',
+    ]),
+
+    async rollToNumber () {
       const vm = this;
       const number = vm.$el.getElementsByClassName('boxNumber__number');
+      const time = `${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}`;
+      const dashbroad = {
+        number: vm.current_number,
+        time,
+      };
 
-      number.forEach((eleNumber, idx) => {
-        const eleRotation = eleNumber.getElementsByClassName('boxNumber__rotationNumber');
-        const index = vm.current_number[idx];
-        const angle = vm.array_offset_number[index];
-        const posEgde = angle - 400;
-        const pos = angle;
-        const delay = (vm.end_number.toString().length - idx) * 700;
+      await new Promise((reslove, reject) => {
+        number.forEach(async (eleNumber, idx) => {
+          const eleRotation = eleNumber.getElementsByClassName('boxNumber__rotationNumber');
+          const index = vm.current_number[idx];
+          const angle = vm.array_offset_number[index];
+          const posEgde = angle - 400;
+          const pos = angle;
+          const delay = (vm.end_number.toString().length - idx) * 700;
 
-        setTimeout(() => {
+          await new Promise((reslove, reject) => { setTimeout(reslove, 0) });
           eleNumber.classList.remove('rolling');
           eleRotation[0].style.transform = `rotateX(${posEgde}deg)`;
-
-          setTimeout(() => {
-            eleRotation[0].style.transition = 'all 1.8s ease-out';
-            eleRotation[0].style.transform = `rotateX(${pos}deg)`;
-          }, 30);
-        }, delay);
+          await new Promise((reslove, reject) => { setTimeout(reslove, 30) });
+          eleRotation[0].style.transition = 'all 1.8s ease-out';
+          eleRotation[0].style.transform = `rotateX(${pos}deg)`;
+        });
+        reslove();
       });
+
+      this.addLuckyNumber(dashbroad);
     },
   },
 

@@ -124,6 +124,7 @@ export default {
     top: 50%;
     left: 50%;
     transform-style: preserve-3d;
+    transition: all 0.4s ease-out;
 
     .rolling & {
       animation: ani-rolling 1s linear infinite;

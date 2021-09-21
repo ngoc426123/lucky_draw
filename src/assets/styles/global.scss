@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  outline: none;
 }
 
 html,
@@ -8,6 +9,10 @@ body {
   font-size: 14px;
   line-height: auto;
   overflow: hidden;
+}
+
+table {
+  border-collapse: collapse;
 }
 
 .rs-control {

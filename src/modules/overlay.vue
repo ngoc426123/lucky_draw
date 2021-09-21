@@ -1,5 +1,10 @@
 <template>
-  <div class="overlay" v-if="open"></div>
+  <div
+    class="overlay"
+    :class="{
+      'open': open
+    }"
+  ></div>
 </template>
 
 <script>
@@ -25,5 +30,25 @@ export default {
   left: 0;
   z-index: 20;
   background: rgba(0,0,0,.7);
+
+  .GoLive & {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+
+  .EditLive & {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
 }
 </style>

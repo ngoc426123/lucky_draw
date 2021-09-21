@@ -46,6 +46,10 @@ export default {
     ...mapState('screen', [
       'is_edit_program',
     ]),
+
+    ...mapState('dashbroad', [
+      'is_show_dashbroad',
+    ]),
   },
 
   methods: {
@@ -59,6 +63,10 @@ export default {
       'rollNumber',
       'getNumber',
     ]),
+
+    ...mapActions('dashbroad', [
+      'updateIsShowDashbroad'
+    ]),
   },
 
   created () {
@@ -71,18 +79,23 @@ export default {
         return;
       }
 
-      switch (key.key) {
-        case 'Enter':
-          if ( this.rolling ) {
-            this.rollNumber(false);
-            this.getNumber();
-          } else {
-            this.rollNumber(true);
-          }
-          break;
+      if ( key.key === 'Enter' ) {
+        if ( this.rolling ) {
+          this.rollNumber(false);
+          this.getNumber();
+        } else {
+          this.rollNumber(true);
+        }
+      }
 
-        default:
-          break;
+      if ( key.key === 'F10' && key.ctrlKey ) {
+        if ( !this.is_show_dashbroad ) {
+          this.openOverlay(true);
+          this.updateIsShowDashbroad(true);
+        } else {
+          this.openOverlay(false);
+          this.updateIsShowDashbroad(false);
+        }
       }
     });
   }

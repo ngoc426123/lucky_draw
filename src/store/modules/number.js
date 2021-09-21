@@ -85,7 +85,6 @@ export default {
 
       dispatch('updateArrayNumber', array_number);
       dispatch('updateCurrentNumber', finalNumber);
-      console.log(finalNumber);
     },
 
     // FUNCTION GAME HANDLE
