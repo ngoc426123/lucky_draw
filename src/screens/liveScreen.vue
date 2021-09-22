@@ -48,17 +48,23 @@ export default {
   },
 
   methods: {
-    ...mapActions('screen', [
-      'updateIsEditProgram'
-    ]),
-    
     ...mapActions([
       'updateIsTransition',
     ]),
 
+    ...mapActions('screen', [
+      'updateIsEditProgram'
+    ]),
+
+    ...mapActions('number', [
+      'clearGame'
+    ]),
+
+
     async onClickGoEdit () {
       this.updateIsTransition(true);
       await new Promise((reslove, reject) => setTimeout(reslove, 200));
+      this.clearGame();
       this.updateIsEditProgram(true);
       await new Promise((reslove, reject) => setTimeout(reslove, 800));
       this.updateIsTransition(false);

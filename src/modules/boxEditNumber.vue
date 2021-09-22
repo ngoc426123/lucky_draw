@@ -8,10 +8,7 @@
       <div class="form horizontal">
         <div class="box__content--region">
           <div class="form__row">
-            <label
-              class="form__label"
-              for=""
-              style="padding-top: 0">Customsize Number</label>
+            <label class="form__label" for="" style="width: 170px">Customsize Number</label>
             <div class="form__colRight">
               <div class="form__group" style="max-width: 400px">
                 <input
@@ -19,17 +16,33 @@
                   class="form__control"
                   placeholder="Prefix"
                   v-model="setter_prefix_number"
-                  style="display:block; width: 80px; margin: 0 10px">
-                <div style="display:block; text-align: center; margin: 0 10px"> : </div>
+                  style="display:block; width: 80px; margin: 0 5px">
+                <div style="display:block; text-align: center; margin: 0 5px"> : </div>
                 <input
                   type="number"
                   class="form__control"
                   v-model="setter_start_number">
-                <div style="display:block; text-align: center; margin: 0 10px"> → </div>
+                <div style="display:block; text-align: center; margin: 0 5px"> → </div>
                 <input
                   type="number"
                   class="form__control"
                   v-model="setter_end_number">
+              </div>
+              <div class="form__validate" v-if="!range_number_validate">Error: End number alway more than first number and small than {{max_number}}</div>
+            </div>
+          </div>
+          <div class="form__row">
+            <label class="form__label" for="" style="width: 170px">Style Stop Rolling</label>
+            <div class="form__colRight">
+              <div class="form__group" style="max-width: 400px">
+                <select class="form__control" v-model="setter_current_style_stop_rolling">
+                    <option
+                      v-for="item in list_style_stop_rolling"
+                      :key="item.key"
+                      :value="item.type"
+                      v-text="item.text"
+                    ></option>
+                  </select>
               </div>
               <div class="form__validate" v-if="!range_number_validate">Error: End number alway more than first number and small than {{max_number}}</div>
             </div>
@@ -75,7 +88,7 @@
                       :key="item.key"
                       :value="item"
                       v-text="item"
-                    >Solid</option>
+                    ></option>
                   </select>
                   <input
                     type="number"
@@ -236,7 +249,9 @@ export default {
       'prefix_number',
       'start_number',
       'end_number',
-      'max_number'
+      'max_number',
+      'list_style_stop_rolling',
+      'current_style_stop_rolling',
     ]),
 
     setter_prefix_number: {
@@ -265,6 +280,15 @@ export default {
         this.updateEndNumber(value);
       }
     },
+
+    setter_current_style_stop_rolling: {
+      get (vm) {
+        return vm.current_style_stop_rolling;
+      },
+      set (value) {
+        this.updateCurrentStyleStopRolling(value);
+      }
+    },
   },
 
   methods: {
@@ -274,7 +298,8 @@ export default {
       'updateListLineHeight',
       'updatePrefixNumber',
       'updateStartNumber',
-      'updateEndNumber'
+      'updateEndNumber',
+      'updateCurrentStyleStopRolling'
     ]),
 
     ...mapActions('overlay', [

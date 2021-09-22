@@ -26,20 +26,38 @@
         </tbody>
       </table>
     </div>
+    <div class="box__footer in-right">
+      <Button type="icon" size="xs" v-on:click="onClickClearDashbroad"><span class="icon icon-clear"></span></Button>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import Button from '../components/button.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Dashbroad',
+
+  components: {
+    Button
+  },
 
   computed: {
     ...mapState('dashbroad', [
       'is_show_dashbroad',
       'lucky_number_array'
     ]),
+  },
+
+  methods: {
+    ...mapActions('dashbroad', [
+      'clearDashbroad'
+    ]),
+
+    onClickClearDashbroad () {
+      this.clearDashbroad();
+    }
   }
 }
 </script>
@@ -94,14 +112,14 @@ table {
       text-align: left;
       color: #ffffff;
       background-color: #19bdb9;
-      border-bottom: 2px solid rgb(71, 71, 71);
+      border-bottom: 1px solid rgb(71, 71, 71);
       position: sticky;
     }
 
     td {
       padding: 15px 20px;
-      font-size: 15px;
-      border-bottom: 2px solid #cacaca;
+      font-size: 18px;
+      border-bottom: 1px solid #cacaca;
     }
 
     th:last-child,

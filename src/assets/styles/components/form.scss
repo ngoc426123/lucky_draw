@@ -16,6 +16,8 @@
   }
 
   &__label {
+    flex-shrink: 0;
+
     .horizontal & {
       width: 120px;
       padding-top: 10px;

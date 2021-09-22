@@ -6,6 +6,7 @@ export default {
 
   mutations: {
     isShowDashbroad: (vm, data) => (vm. is_show_dashbroad = data),
+    updateLuckyNumber: (vm, data) => vm.lucky_number_array = data,
     addLuckyNumber: (vm, data) => {
       const luckyNumberArray = vm.lucky_number_array;
 
@@ -17,5 +18,6 @@ export default {
   actions: {
     updateIsShowDashbroad: ({ commit }, data) => commit('isShowDashbroad', data),
     addLuckyNumber: ({ commit }, data) => commit('addLuckyNumber', data),
+    clearDashbroad: ({ commit }) => commit('updateLuckyNumber', []),
   }
 }

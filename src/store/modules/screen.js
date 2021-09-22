@@ -1,6 +1,6 @@
 export default {
   state: {
-    is_edit_program: false,
+    is_edit_program: true,
   },
 
   mutations: {

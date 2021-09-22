@@ -101,9 +101,8 @@ export default {
     margin-right: 20px;
     border: 3px solid #ffffff;
     border-radius: 8px;
-    // background: linear-gradient(180deg, #b8c139 0, #7f8c08);
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.55);
-    transition: filter 2s linear;
+    transition: filter 1.6s linear;
     position: relative;
     overflow: hidden;
 

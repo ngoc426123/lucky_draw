@@ -47,7 +47,12 @@ export default {
       'prefix_number',
       'current_number',
       'rolling',
-      'array_offset_number'
+      'array_offset_number',
+      'current_style_stop_rolling'
+    ]),
+
+    ...mapState('screen', [
+      'is_edit_program'
     ]),
 
     number_slot: ({ end_number, max_number }) => end_number <= max_number ? end_number.toString().length : max_number.toString().length,
@@ -62,6 +67,8 @@ export default {
       }
       return arr;
     },
+
+    numberLength: ({ max_number }) => max_number.toString().length,
   },
 
   methods: {
@@ -72,22 +79,44 @@ export default {
     rollToNumber () {
       const vm = this;
       const time = `${new Date().toLocaleTimeString()} ${new Date().toLocaleDateString()}`;
+      const eleNumber = this.$el.getElementsByClassName('boxNumber__number');
+      const eleRotation = vm.$el.getElementsByClassName('boxNumber__rotationNumber');
       const dashbroad = {
         number: vm.prefix_number ? vm.prefix_number+vm.current_number : vm.current_number,
         time,
       };
 
       vm.running.forEach(async (item, idx) => {
-        const eleRotation = vm.$el.getElementsByClassName('boxNumber__rotationNumber');
         const index = vm.current_number[idx];
         const angle = vm.array_offset_number[index];
-        const posEgde = angle - 180;
         const pos = angle;
-        const delay = (vm.end_number.toString().length - 1 - idx) * 700;
+        let delay = null;
 
+        switch (vm.current_style_stop_rolling) {
+          case 0:
+            delay = 0;
+            break;
+
+          case 1:
+            delay = idx * 700;
+            break;
+
+          case 2:
+            delay = (vm.numberLength - 1 - idx) * 700;
+            break;
+
+          case 3:
+            delay = parseInt(Math.random() * (1000 - 300) + 300);
+            break;
+        
+          default:
+            break;
+        }
+        
         await new Promise((res, rej) => setTimeout(res, delay));
         item.pause();
-        gsap.fromTo(eleRotation[idx], { rotateX: posEgde }, { rotateX: pos, duration: 2 });
+        eleNumber[idx].classList.remove('rolling');
+        gsap.to(eleRotation[idx], { rotateX: pos, duration: 2 });
       });
 
       this.addLuckyNumber(dashbroad);
@@ -100,8 +129,10 @@ export default {
         return;
       }
       
+      const eleNumber = this.$el.getElementsByClassName('boxNumber__number');
       const eleRotation = this.$el.getElementsByClassName('boxNumber__rotationNumber');
 
+      eleNumber.forEach(item => item.classList.add('rolling'));
       this.running.forEach((item, idx) => {
         item.play();
         item.fromTo(eleRotation[idx], { rotateX: 0 }, { rotateX: 360, repeat: -1, duration: 0.5 });
@@ -110,6 +141,17 @@ export default {
 
     current_number (value) {
       value !== 0 && this.rollToNumber();
+    },
+
+    is_edit_program (value) {
+      const eleNumber = this.$el.getElementsByClassName('boxNumber__number');
+      const eleRotation = this.$el.getElementsByClassName('boxNumber__rotationNumber');
+
+      eleNumber.forEach(item => item.classList.remove('rolling'));
+      value && this.running.forEach((item, idx) => {
+        item.pause();
+        gsap.set(eleRotation[idx], { rotateX: 0 });
+      });
     }
   }
 }

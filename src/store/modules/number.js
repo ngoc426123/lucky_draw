@@ -33,12 +33,21 @@ export default {
     // NUMBER
     prefix_number: '',
     start_number: 1,
-    end_number: 100,
+    end_number: 999999,
     max_number: 999999,
     array_offset_number: [0, 36, 72, 108, 144, 180, 216, 252, 288, 324],
     array_number: [],
     current_number: '',
     rolling: false,
+    list_style_stop_rolling: [
+      { type: 0, text: 'None' },
+      { type: 1, text: 'Left to right' },
+      { type: 2, text: 'Right to left' },
+      { type: 3, text: 'Random' },
+      { type: 4, text: 'Middle to beside' },
+      { type: 5, text: 'Middle to beside' },
+    ],
+    current_style_stop_rolling: 3,
   },
 
   mutations: {
@@ -51,6 +60,7 @@ export default {
     arrayNumber: (vm, data) => (vm.array_number = data.data),
     currentNumber: (vm, data) => (vm.current_number = data.data),
     rolling: (vm, data) => (vm.rolling = data),
+    currentStyleStopRolling: (vm, data) => (vm.current_style_stop_rolling = data),
   },
 
   actions: {
@@ -87,8 +97,11 @@ export default {
       dispatch('updateCurrentNumber', finalNumber);
     },
 
-    // FUNCTION GAME HANDLE
-    
+    clearGame: ({ dispatch }) => {
+      dispatch('updateRolling', false);
+      dispatch('updateCurrentNumber', 0);
+      dispatch('updateArrayNumber', []);
+    },
 
     // UPDATE FUNCTION
     updateIsEditNumber: ({ commit }, data) => commit('isEditNumber', data),
@@ -100,5 +113,6 @@ export default {
     updateArrayNumber: ({ commit }, data) => commit('arrayNumber', { data }),
     updateCurrentNumber: ({ commit }, data) => commit('currentNumber', { data }),
     updateRolling: ({ commit }, data) => commit('rolling', data),
+    updateCurrentStyleStopRolling: ({ commit }, data) => commit('currentStyleStopRolling', data),
   },
 }
