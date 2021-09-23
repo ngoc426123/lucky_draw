@@ -143,7 +143,7 @@ export default {
       eleNumber.forEach(item => item.classList.add('rolling'));
       this.running.forEach((item, idx) => {
         item.play();
-        item.fromTo(eleRotation[idx], { rotateX: 0 }, { rotateX: 360, repeat: -1, duration: 0.5, runBackwards: true });
+        item.fromTo(eleRotation[idx], { rotateX: 0 }, { rotateX: 360, repeat: -1, duration: 0.5 });
       });
     },
 
@@ -156,9 +156,9 @@ export default {
       const eleRotation = this.$el.getElementsByClassName('boxNumber__rotationNumber');
 
       eleNumber.forEach(item => item.classList.remove('rolling'));
+      gsap.set(eleRotation, { rotateX: 0 });
       value && this.running.forEach((item, idx) => {
         item.pause();
-        gsap.set(eleRotation[idx], { rotateX: 0 });
       });
     }
   }

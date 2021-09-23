@@ -15,13 +15,11 @@
     <div class="screen__btnGroup">
       <Button
         type="solid"
-        cstClass="screen__btnGoLive"
         size="md"
         v-on:click="onClickEditLanguage"
       >{{$t('btn_menu.language')}}</Button>
       <Button
         type="solid"
-        cstClass="screen__btnGoLive"
         size="md"
         v-on:click="onClickGoLive"
       >{{$t('btn_menu.go_live')}}</Button>

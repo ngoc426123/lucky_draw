@@ -49,6 +49,7 @@ export default {
       { type: 4, text: i18n.t('box_edit_number.rolling_stop_style.b2m') },
     ],
     current_rolling_stop_style: 0,
+    is_prevent_fast_spin: false,
   },
 
   mutations: {
@@ -61,8 +62,9 @@ export default {
     arrayNumber: (vm, data) => (vm.array_number = data.data),
     currentNumber: (vm, data) => (vm.current_number = data.data),
     isRolling: (vm, data) => (vm.is_rolling = data),
-    updateListRollingStopStyle: (vm, data) => (vm.list_rolling_stop_style = data),
+    listRollingStopStyle: (vm, data) => (vm.list_rolling_stop_style = data),
     currentRollingStopStyle: (vm, data) => (vm.current_rolling_stop_style = data),
+    isPreventFastSpin: (vm, data) => (vm.is_prevent_fast_spin = data),
   },
 
   actions: {
@@ -117,5 +119,6 @@ export default {
     updateIsRolling: ({ commit }, data) => commit('isRolling', data),
     updateListRollingStopStyle: ({ commit }, data) => commit('listRollingStopStyle', data),
     updateCurrentRollingStopStyle: ({ commit }, data) => commit('currentRollingStopStyle', data),
+    updateIsPreventFastSpin: ({ commit }, data) => commit('isPreventFastSpin', data),
   },
 }

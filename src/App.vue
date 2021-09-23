@@ -66,7 +66,6 @@ export default {
         { type: 4, text: this.$i18n.t('box_edit_number.rolling_stop_style.b2m') },
       ]);
       this.updateIsTransition(false);
-      console.log(this.$i18n.t('box_edit_number.rolling_stop_style.none'));
     }
   }
 };

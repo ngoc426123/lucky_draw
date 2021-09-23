@@ -41,6 +41,7 @@ export default {
       'number',
       'prefix_number',
       'is_rolling',
+      'is_prevent_fast_spin',
     ]),
 
     ...mapState('screen', [
@@ -62,6 +63,7 @@ export default {
       'setupNumber',
       'rollNumber',
       'getNumber',
+      'updateIsPreventFastSpin',
     ]),
 
     ...mapActions('dashbroad', [
@@ -74,17 +76,26 @@ export default {
   },
 
   mounted () {
-    document.addEventListener('keyup', (key) => {
+    document.addEventListener('keyup', async (key) => {
       if ( this.is_edit_program && this.is_transition ) {
         return;
       }
 
       if ( key.key === 'Enter' ) {
-        if ( this.is_rolling ) {
-          this.rollNumber(false);
-          this.getNumber();
+        if ( this.is_rolling  ) {
+          if ( !this.is_prevent_fast_spin ) {
+            this.updateIsPreventFastSpin(true);
+            await new Promise((reslove, reject) => {setTimeout(reslove, 300)});
+            this.getNumber();
+            this.rollNumber(false);
+            await new Promise((reslove, reject) => {setTimeout(reslove, 2500)});
+            this.updateIsPreventFastSpin(false);
+          }
         } else {
           this.rollNumber(true);
+          this.updateIsPreventFastSpin(true);
+          await new Promise((reslove, reject) => {setTimeout(reslove, 2000)});
+          this.updateIsPreventFastSpin(false);
         }
       }
 

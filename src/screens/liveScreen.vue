@@ -4,6 +4,8 @@
     class="container screen"
     :class="{
       'GoLive': !is_edit_program,
+      'isRolling': is_rolling,
+      'isPreventFastSpin': is_prevent_fast_spin,
     }"
   >
     <Background />
@@ -17,7 +19,12 @@
         cstClass="screen__btnRolling"
         tooltip="Enter"
         v-on:click="onClickRolling"
-      >{{is_rolling ? $t('btn_rolling.text_stop') : $t('btn_rolling.text_roll')}}</Button>
+      >
+        <span>
+          <span>{{$t('btn_rolling.text_roll')}}</span>
+          <span>{{$t('btn_rolling.text_stop')}}</span>
+        </span>
+      </Button>
     </div>
     <Button
       type="transparent"
@@ -52,7 +59,8 @@ export default {
 
   computed: {
     ...mapState('number', [
-      'is_rolling'
+      'is_rolling',
+      'is_prevent_fast_spin',
     ]),
 
     ...mapState('screen', [
@@ -73,14 +81,24 @@ export default {
       'rollNumber',
       'getNumber',
       'clearGame',
+      'updateIsPreventFastSpin'
     ]),
 
-    onClickRolling () {
+    async onClickRolling () {
       if ( this.is_rolling ) {
-        this.rollNumber(false);
-        this.getNumber();
+        if ( !this.is_prevent_fast_spin ) {
+          this.updateIsPreventFastSpin(true);
+          await new Promise((reslove, reject) => {setTimeout(reslove, 300)});
+          this.getNumber();
+          this.rollNumber(false);
+          await new Promise((reslove, reject) => {setTimeout(reslove, 2500)});
+          this.updateIsPreventFastSpin(false);
+        }
       } else {
         this.rollNumber(true);
+        this.updateIsPreventFastSpin(true);
+        await new Promise((reslove, reject) => {setTimeout(reslove, 2000)});
+        this.updateIsPreventFastSpin(false);
       }
     },
 
@@ -88,6 +106,7 @@ export default {
       this.updateIsTransition(true);
       await new Promise((reslove, reject) => setTimeout(reslove, 200));
       this.clearGame();
+      this.updateIsPreventFastSpin(false);
       this.updateIsEditProgram(true);
       await new Promise((reslove, reject) => setTimeout(reslove, 800));
       this.updateIsTransition(false);
@@ -134,6 +153,7 @@ export default {
 
   &__btnRolling {
     width: 280px;
+    height: 65px;
     border: none;
     border-bottom: solid 4px #c4281d;
     background-color: #f44336;
@@ -141,7 +161,8 @@ export default {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    position: relative;
 
     &:hover {
       background-color: #da2f23;
@@ -169,6 +190,49 @@ export default {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
+    }
+
+    .isPreventFastSpin & {
+      transform: translateY(50%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    > span {
+      line-height: 65px;
+      position: absolute; 
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      overflow: hidden;
+
+      > span {
+        position: absolute; 
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        overflow: hidden;
+        transition: opacity 0.1s ease 0.2s;
+
+        &:first-child {
+          color: #ffffff;
+
+          .isRolling & {
+            opacity: 0;
+          }
+        }
+
+        &:last-child {
+          opacity: 0;
+
+          .isRolling & {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }
