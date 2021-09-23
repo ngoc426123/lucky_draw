@@ -2,7 +2,7 @@ export default {
   "vn": {
     "text_editting": "Đang tùy chỉnh chương trình...",
     "btn_menu": {
-      "accept": "Đồng ý",
+      "accept": "Đóng",
       "language": "Ngôn ngữ",
       "go_live": "Chạy chương trình",
       "customsize": "Tùy chỉnh"
@@ -22,25 +22,29 @@ export default {
       "box_title": "Cập nhật số",
       "prefix": "Đệm",
       "label_customsize_number": "Dãy số",
-      "label_style_stop_rolling": "Kiểu dừng",
-      "title_container": "Vùng nền",
+      "label_rolling_stop_style": "Kiểu dừng",
+      "title_container": "Khu vực nền",
       "label_container_background": "Màu nền",
       "label_container_border": "Khung viền",
-      "title_number": "Vùng dãy số",
+      "title_number": "Khu vực dãy số",
       "label_number_background": "Màu nền",
       "label_number_border": "Khung viền",
       "label_number_font": "Kiểu chữ",
       "text_validate_number": "Lỗi: Số kết thúc luôn lớn hơn số đầu tiên và nhỏ hơn {num}",
-      "style_stop_rolling": {
+      "rolling_stop_style": {
         "none": "Bình thường",
         "l2r": "Trái qua phải",
         "r2l": "Phải qua trái",
         "rand": "Ngẫu nhiên",
         "b2m": "Hai bên vô gữa",
-      },
+      }
     },
     "box_edit_language": {
       "box_title": "Cập nhật ngôn ngữ",
+    },
+    "btn_rolling": {
+      "text_roll": "Quay số",
+      "text_stop": "Dừng",
     },
     "dashbroad": {
       "title_stt": "Stt",

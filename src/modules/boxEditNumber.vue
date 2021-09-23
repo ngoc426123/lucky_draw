@@ -31,12 +31,12 @@
             </div>
           </div>
           <div class="form__row">
-            <label class="form__label" for="">{{$t('box_edit_number.label_style_stop_rolling')}}</label>
+            <label class="form__label" for="">{{$t('box_edit_number.label_rolling_stop_style')}}</label>
             <div class="form__colRight">
               <div class="form__group" style="max-width: 400px">
-                <select class="form__control" v-model="setter_current_style_stop_rolling">
+                <select class="form__control" v-model="setter_current_rolling_stop_style">
                     <option
-                      v-for="item in list_style_stop_rolling"
+                      v-for="item in list_rolling_stop_style"
                       :key="item.key"
                       :value="item.type"
                       v-text="item.text"
@@ -249,8 +249,8 @@ export default {
       'start_number',
       'end_number',
       'max_number',
-      'list_style_stop_rolling',
-      'current_style_stop_rolling',
+      'list_rolling_stop_style',
+      'current_rolling_stop_style',
     ]),
 
     setter_prefix_number: {
@@ -280,12 +280,12 @@ export default {
       }
     },
 
-    setter_current_style_stop_rolling: {
+    setter_current_rolling_stop_style: {
       get (vm) {
-        return vm.current_style_stop_rolling;
+        return vm.current_rolling_stop_style;
       },
       set (value) {
-        this.updateCurrentStyleStopRolling(value);
+        this.updateCurrentRollingStopStyle(value);
       }
     },
   },
@@ -298,7 +298,7 @@ export default {
       'updatePrefixNumber',
       'updateStartNumber',
       'updateEndNumber',
-      'updateCurrentStyleStopRolling'
+      'updateCurrentRollingStopStyle'
     ]),
 
     ...mapActions('overlay', [

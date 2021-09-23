@@ -145,7 +145,7 @@ export default {
 
   &__btnGroup {
     position: fixed;
-    bottom: 40px;
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;

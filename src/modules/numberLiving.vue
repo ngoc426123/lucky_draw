@@ -46,9 +46,9 @@ export default {
       'max_number',
       'prefix_number',
       'current_number',
-      'rolling',
+      'is_rolling',
       'array_offset_number',
-      'current_style_stop_rolling'
+      'current_rolling_stop_style'
     ]),
 
     ...mapState('screen', [
@@ -92,7 +92,7 @@ export default {
         const pos = angle;
         let delay = null;
 
-        switch (vm.current_style_stop_rolling) {
+        switch (vm.current_rolling_stop_style) {
           case 0:
             delay = 0;
             break;
@@ -120,8 +120,6 @@ export default {
           default:
             break;
         }
-
-        console.log(vm.numberLength, delay);
         
         await new Promise((res, rej) => setTimeout(res, delay));
         item.pause();
@@ -134,7 +132,7 @@ export default {
   },
 
   watch: {
-    rolling (value) {
+    is_rolling (value) {
       if ( !value ) {
         return;
       }
@@ -145,7 +143,7 @@ export default {
       eleNumber.forEach(item => item.classList.add('rolling'));
       this.running.forEach((item, idx) => {
         item.play();
-        item.fromTo(eleRotation[idx], { rotateX: 0 }, { rotateX: 360, repeat: -1, duration: 0.5 });
+        item.fromTo(eleRotation[idx], { rotateX: 0 }, { rotateX: 360, repeat: -1, duration: 0.5, runBackwards: true });
       });
     },
 

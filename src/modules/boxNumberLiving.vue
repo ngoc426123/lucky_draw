@@ -40,7 +40,7 @@ export default {
     ...mapState('number', [
       'number',
       'prefix_number',
-      'rolling',
+      'is_rolling',
     ]),
 
     ...mapState('screen', [
@@ -80,7 +80,7 @@ export default {
       }
 
       if ( key.key === 'Enter' ) {
-        if ( this.rolling ) {
+        if ( this.is_rolling ) {
           this.rollNumber(false);
           this.getNumber();
         } else {

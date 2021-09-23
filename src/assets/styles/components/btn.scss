@@ -20,10 +20,6 @@
     }
   }
 
-  &-icon {
-    
-  }
-
   &-transparent {
     background-color: transparent;
     border: solid 1px rgba(255,255,255,0.2);
@@ -50,5 +46,10 @@
   &-md {
     font-size: 20px;
     padding: 15px 35px;
+  }
+
+  &-lg {
+    font-size: 30px;
+    padding: 16px 45px;
   }
 }

@@ -2,7 +2,7 @@ export default {
   "en": {
     "text_editting": "Screen Editting...",
     "btn_menu": {
-      "accept": "Accept",
+      "accept": "Close",
       "language": "Language",
       "go_live": "Go Live",
       "customsize": "Customsize"
@@ -22,7 +22,7 @@ export default {
       "box_title": "Edit Number",
       "prefix": "Prefix",
       "label_customsize_number": "Customsize number",
-      "label_style_stop_rolling": "Style Stop Rolling",
+      "label_rolling_stop_style": "Rolling stop style",
       "title_container": "Container",
       "label_container_background": "Background",
       "label_container_border": "Border",
@@ -31,16 +31,20 @@ export default {
       "label_number_border": "Border",
       "label_number_font": "Font",
       "text_validate_number": "Error: End number alway more than first number and small than {num}",
-      "style_stop_rolling": {
+      "rolling_stop_style": {
         "none": "None",
         "l2r": "Left to right",
         "r2l": "Right to left",
         "rand": "Random",
         "b2m": "Beside to middle",
-      },
+      }
     },
     "box_edit_language": {
       "box_title": "Edit Language",
+    },
+    "btn_rolling": {
+      "text_roll": "Spin",
+      "text_stop": "Stop",
     },
     "dashbroad": {
       "title_stt": "Num",

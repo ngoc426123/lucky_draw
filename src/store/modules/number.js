@@ -1,4 +1,4 @@
-import i18n from '../../language/'
+import i18n from '../../language/index'
 
 export default {
   state: {
@@ -35,20 +35,20 @@ export default {
     // NUMBER
     prefix_number: '',
     start_number: 1,
-    end_number: 999999,
+    end_number: 99999,
     max_number: 999999,
     array_offset_number: [0, 36, 72, 108, 144, 180, 216, 252, 288, 324],
     array_number: [],
     current_number: '',
-    rolling: false,
-    list_style_stop_rolling: [
-      { type: 0, text: i18n.t('box_edit_number.style_stop_rolling.none') },
-      { type: 1, text: i18n.t('box_edit_number.style_stop_rolling.l2r') },
-      { type: 2, text: i18n.t('box_edit_number.style_stop_rolling.r2l') },
-      { type: 3, text: i18n.t('box_edit_number.style_stop_rolling.rand') },
-      { type: 4, text: i18n.t('box_edit_number.style_stop_rolling.b2m') },
+    is_rolling: false,
+    list_rolling_stop_style: [
+      { type: 0, text: i18n.t('box_edit_number.rolling_stop_style.none') },
+      { type: 1, text: i18n.t('box_edit_number.rolling_stop_style.l2r') },
+      { type: 2, text: i18n.t('box_edit_number.rolling_stop_style.r2l') },
+      { type: 3, text: i18n.t('box_edit_number.rolling_stop_style.rand') },
+      { type: 4, text: i18n.t('box_edit_number.rolling_stop_style.b2m') },
     ],
-    current_style_stop_rolling: 0,
+    current_rolling_stop_style: 0,
   },
 
   mutations: {
@@ -60,8 +60,9 @@ export default {
     endNumber: (vm, data) => (vm.end_number = data),
     arrayNumber: (vm, data) => (vm.array_number = data.data),
     currentNumber: (vm, data) => (vm.current_number = data.data),
-    rolling: (vm, data) => (vm.rolling = data),
-    currentStyleStopRolling: (vm, data) => (vm.current_style_stop_rolling = data),
+    isRolling: (vm, data) => (vm.is_rolling = data),
+    updateListRollingStopStyle: (vm, data) => (vm.list_rolling_stop_style = data),
+    currentRollingStopStyle: (vm, data) => (vm.current_rolling_stop_style = data),
   },
 
   actions: {
@@ -78,7 +79,7 @@ export default {
 
     rollNumber: ({ dispatch }, data) => {
       data && dispatch('updateCurrentNumber', 0);
-      dispatch('updateRolling', data);
+      dispatch('updateIsRolling', data);
     },
 
     getNumber: ({ dispatch, state }) => {
@@ -99,7 +100,7 @@ export default {
     },
 
     clearGame: ({ dispatch }) => {
-      dispatch('updateRolling', false);
+      dispatch('updateIsRolling', false);
       dispatch('updateCurrentNumber', 0);
       dispatch('updateArrayNumber', []);
     },
@@ -113,7 +114,8 @@ export default {
     updateEndNumber: ({ commit }, data) => commit('endNumber', data),
     updateArrayNumber: ({ commit }, data) => commit('arrayNumber', { data }),
     updateCurrentNumber: ({ commit }, data) => commit('currentNumber', { data }),
-    updateRolling: ({ commit }, data) => commit('rolling', data),
-    updateCurrentStyleStopRolling: ({ commit }, data) => commit('currentStyleStopRolling', data),
+    updateIsRolling: ({ commit }, data) => commit('isRolling', data),
+    updateListRollingStopStyle: ({ commit }, data) => commit('listRollingStopStyle', data),
+    updateCurrentRollingStopStyle: ({ commit }, data) => commit('currentRollingStopStyle', data),
   },
 }

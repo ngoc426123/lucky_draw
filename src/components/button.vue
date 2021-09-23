@@ -3,6 +3,7 @@
     class="btn"
     :class="[`btn-${props.type}`, `btn-${props.size}`, props.cstClass]"
     @click="listeners.click"
+    v-bind:data-tooltip="props.tooltip"
   >
     <slot/>
   </button>
@@ -28,6 +29,11 @@ export default {
     size: {
       type: String,
       default: 'sm'
+    },
+
+    tooltip: {
+      type: String,
+      default: '',
     }
   },
 }

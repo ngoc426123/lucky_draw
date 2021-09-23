@@ -34,6 +34,10 @@ export default {
       'updateIsTransition'
     ]),
 
+    ...mapActions('number', [
+      'updateListRollingStopStyle'
+    ]),
+
     changeLanguage (value) {
       this.$i18n.locale = value;
     },
@@ -50,11 +54,19 @@ export default {
   },
 
   watch: {
-    async language (value) {
+    async current_language (value) {
       this.updateIsTransition(true);
       await new Promise((reslove, reject) => setTimeout(reslove, 1000));
       this.changeLanguage(value);
+      this.updateListRollingStopStyle([
+        { type: 0, text: this.$i18n.t('box_edit_number.rolling_stop_style.none') },
+        { type: 1, text: this.$i18n.t('box_edit_number.rolling_stop_style.l2r') },
+        { type: 2, text: this.$i18n.t('box_edit_number.rolling_stop_style.r2l') },
+        { type: 3, text: this.$i18n.t('box_edit_number.rolling_stop_style.rand') },
+        { type: 4, text: this.$i18n.t('box_edit_number.rolling_stop_style.b2m') },
+      ]);
       this.updateIsTransition(false);
+      console.log(this.$i18n.t('box_edit_number.rolling_stop_style.none'));
     }
   }
 };
