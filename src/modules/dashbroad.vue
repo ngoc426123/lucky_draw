@@ -9,9 +9,9 @@
       <table>
         <thead>
           <tr>
-            <th>Stt</th>
-            <th>Lucky Number</th>
-            <th>Time</th>
+            <th>{{$t('dashbroad.title_stt')}}</th>
+            <th>{{$t('dashbroad.title_lucky_number')}}</th>
+            <th>{{$t('dashbroad.title_time')}}</th>
           </tr>
         </thead>
         <tbody>

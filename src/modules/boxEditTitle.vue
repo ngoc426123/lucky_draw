@@ -1,10 +1,10 @@
 <template>
   <div class="boxEditTitle box" v-if="is_edit_title">
-    <div class="box__title">Edit Title</div>
+    <div class="box__title">{{$t('box_edit_title.box_title')}}</div>
     <div class="box__content">
       <div class="form horizontal">
         <div class="form__row">
-          <label class="form__label" for="">Sub Title</label>
+          <label class="form__label" for="">{{$t('box_edit_title.label_sub_title')}}</label>
           <div class="form__colRight">
             <div class="form__group">
               <input type="text" class="form__control" name="text_sub_text" v-model="text_sub.text">
@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="form__row">
-          <label class="form__label" for="">Title</label>
+          <label class="form__label" for="">{{$t('box_edit_title.label_title')}}</label>
           <div class="form__colRight">
             <div class="form__group">
               <input type="text" class="form__control" name="text_title_text" v-model="text_title.text">
@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="box__footer in-right">
-      <Button type="solid" v-on:click="onClickUpdateTitle">Accept</Button>
+      <Button type="solid" v-on:click="onClickUpdateTitle">{{$t('btn_menu.accept')}}</Button>
     </div>
   </div>
 </template>

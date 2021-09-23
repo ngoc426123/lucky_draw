@@ -14,7 +14,7 @@
       type="transparent"
       cstClass="btnGoEdit"
       v-on:click="onClickGoEdit"
-    >Customsize</Button>
+    >{{$t('btn_menu.customsize')}}</Button>
     <!-- POPUP -->
     <Overlay />
   </div>

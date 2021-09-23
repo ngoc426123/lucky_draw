@@ -7,22 +7,31 @@
     }"
   >
     <!-- TEXT -->
-    <div class="text_edit_screen">Screen Editing...</div>
+    <div class="screen__textEditScreen">{{$t('text_editting')}}</div>
     <!-- COMPONENT -->
     <Background />
     <BoxTitle />
     <BoxNumber />
-    <Button
-      type="solid"
-      cstClass="btnGoLive"
-      size="md"
-      v-on:click="onClickGoLive"
-    >Go Live</Button>
+    <div class="screen__btnGroup">
+      <Button
+        type="solid"
+        cstClass="screen__btnGoLive"
+        size="md"
+        v-on:click="onClickEditLanguage"
+      >{{$t('btn_menu.language')}}</Button>
+      <Button
+        type="solid"
+        cstClass="screen__btnGoLive"
+        size="md"
+        v-on:click="onClickGoLive"
+      >{{$t('btn_menu.go_live')}}</Button>
+    </div>
     <!-- POPUP -->
     <Overlay />
     <BoxEditTitle />
     <BoxEditNumber />
     <BoxEditBackground />
+    <BoxEditLanguage />
   </div>
 </template>
 
@@ -34,6 +43,7 @@ import BoxTitle from "../modules/boxTitle.vue";
 import BoxEditTitle from "../modules/boxEditTitle.vue";
 import BoxNumber from "../modules/boxNumberEditing.vue";
 import BoxEditNumber from "../modules/boxEditNumber.vue";
+import BoxEditLanguage from "../modules/boxEditLanguage.vue";
 import Overlay from "../modules/overlay.vue";
 import Button from '../components/button.vue';
 
@@ -47,6 +57,7 @@ export default {
     BoxEditTitle,
     BoxNumber,
     BoxEditNumber,
+    BoxEditLanguage,
     Overlay,
     Button
   },
@@ -54,6 +65,10 @@ export default {
   computed: {
     ...mapState('screen', [
       'is_edit_program',
+    ]),
+
+    ...mapState('language', [
+      'is_edit_language'
     ]),
   },
 
@@ -70,6 +85,14 @@ export default {
       'setupNumber'
     ]),
 
+    ...mapActions('overlay', [
+      'openOverlay'
+    ]),
+
+    ...mapActions('language', [
+      'updateIsEditLanguage'
+    ]),
+
     async onClickGoLive () {
       this.updateIsTransition(true);
       await new Promise((reslove, reject) => setTimeout(reslove, 200));
@@ -78,6 +101,15 @@ export default {
       await new Promise((reslove, reject) => setTimeout(reslove, 800));
       this.updateIsTransition(false);
     },
+
+    onClickEditLanguage () {
+      if ( !this.is_edit_program ) {
+        return;
+      }
+
+      this.openOverlay(true);
+      this.updateIsEditLanguage(true);
+    }
   }
 };
 </script>
@@ -92,31 +124,35 @@ export default {
   z-index: 2;
 }
 
-.text_edit_screen {
-  padding: 10px 20px;
-  font-size: 15px;
-  font-weight: bold;
-  background: #000000;
-  color: #ffffff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 3;
-}
-
-.btnGoLive {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
 .screen {
   display: none;
 
   &.EditLive {
     display: block;
+  }
+
+  &__textEditScreen {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    background: #000000;
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+
+  &__btnGroup {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    .btn {
+      margin: 0 10px;
+    }
   }
 }
 </style>

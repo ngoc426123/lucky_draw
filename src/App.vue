@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import EditScreen from "./screens/editScreen.vue";
 import LiveScreen from "./screens/liveScreen.vue";
 import TransitionScreen from "./modules/transitionScreen.vue";
@@ -22,20 +22,40 @@ export default {
     LiveScreen,
     TransitionScreen,
   },
+
+  computed: {
+    ...mapState('language', [
+      'current_language'
+    ]),
+  },
   
   methods: {
     ...mapActions([
       'updateIsTransition'
     ]),
+
+    changeLanguage (value) {
+      this.$i18n.locale = value;
+    },
   },
 
   created () {
+    this.changeLanguage(this.current_language);
     this.updateIsTransition(true);
   },
 
   async mounted () {
     await new Promise((reslove, reject)=> { setTimeout(reslove, 1000) });
     this.updateIsTransition(false);
+  },
+
+  watch: {
+    async language (value) {
+      this.updateIsTransition(true);
+      await new Promise((reslove, reject) => setTimeout(reslove, 1000));
+      this.changeLanguage(value);
+      this.updateIsTransition(false);
+    }
   }
 };
 </script>

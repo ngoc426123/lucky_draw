@@ -68,7 +68,7 @@ export default {
       return arr;
     },
 
-    numberLength: ({ max_number }) => max_number.toString().length,
+    numberLength: ({ end_number }) => end_number.toString().length,
   },
 
   methods: {
@@ -108,10 +108,20 @@ export default {
           case 3:
             delay = parseInt(Math.random() * (1000 - 300) + 300);
             break;
+
+          case 4:
+            delay = Math.sin( Math.PI* ( idx / vm.numberLength )) * 700;
+            break;
+
+          case 5:
+            delay = 700;
+            break;
         
           default:
             break;
         }
+
+        console.log(vm.numberLength, delay);
         
         await new Promise((res, rej) => setTimeout(res, delay));
         item.pause();

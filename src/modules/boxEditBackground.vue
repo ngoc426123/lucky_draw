@@ -1,10 +1,10 @@
 <template>
   <div class="boxEditBackground box" v-if="is_edit_background">
-    <div class="box__title">Edit Background</div>
+    <div class="box__title">{{$t('box_edit_background.box_title')}}</div>
     <div class="box__content">
       <div class="form horizontal">
         <div class="form__row">
-          <label class="form__label" for="">Gradient</label>
+          <label class="form__label" for="">{{$t('box_edit_background.label_gradient')}}</label>
           <div class="form__colRight">
             <div class="form__group" style="max-width: 155px">
               <input
@@ -33,19 +33,24 @@
           </div>
         </div>
         <div class="form__row">
-          <label class="form__label" for="">Background</label>
+          <label class="form__label" for="">{{$t('box_edit_background.label_background')}}</label>
           <div class="form__colRight">
-            <input
-              type="text"
-              class="form__control"
-              name="background"
-              v-model="setter_background">
+            <div class="form__group">
+              <input
+                type="text"
+                class="form__control"
+                name="background"
+                v-model="setter_background">
+            </div>
+            <div class="form__group">
+              <div class="form__textNote">{{$t("box_edit_background.text_node")}}</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="box__footer in-right">
-      <Button type="solid" v-on:click="onClickUpdateBackground">Accept</Button>
+      <Button type="solid" v-on:click="onClickUpdateBackground">{{$t('btn_menu.accept')}}</Button>
     </div>
   </div>
 </template>

@@ -8,6 +8,7 @@ import overlay from './modules/overlay'
 import title from './modules/title'
 import number from './modules/number'
 import dashbroad from './modules/dashbroad'
+import language from './modules/language'
 import screen from './modules/screen'
 
 Vue.use(Vuex);
@@ -18,6 +19,7 @@ const modules = {
   title,
   number,
   dashbroad,
+  language,
   screen,
 }
 

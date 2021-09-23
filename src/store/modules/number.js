@@ -1,3 +1,5 @@
+import i18n from '../../language/'
+
 export default {
   state: {
     is_edit_number: false,
@@ -40,14 +42,13 @@ export default {
     current_number: '',
     rolling: false,
     list_style_stop_rolling: [
-      { type: 0, text: 'None' },
-      { type: 1, text: 'Left to right' },
-      { type: 2, text: 'Right to left' },
-      { type: 3, text: 'Random' },
-      { type: 4, text: 'Middle to beside' },
-      { type: 5, text: 'Middle to beside' },
+      { type: 0, text: i18n.t('box_edit_number.style_stop_rolling.none') },
+      { type: 1, text: i18n.t('box_edit_number.style_stop_rolling.l2r') },
+      { type: 2, text: i18n.t('box_edit_number.style_stop_rolling.r2l') },
+      { type: 3, text: i18n.t('box_edit_number.style_stop_rolling.rand') },
+      { type: 4, text: i18n.t('box_edit_number.style_stop_rolling.b2m') },
     ],
-    current_style_stop_rolling: 3,
+    current_style_stop_rolling: 0,
   },
 
   mutations: {

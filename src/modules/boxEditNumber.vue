@@ -3,18 +3,18 @@
     class="boxEditNumber box"
     v-if="is_edit_number"
   >
-    <div class="box__title">Edit Number</div>
+    <div class="box__title">{{$t('box_edit_number.box_title')}}</div>
     <div class="box__content no-padding">
       <div class="form horizontal">
         <div class="box__content--region">
           <div class="form__row">
-            <label class="form__label" for="" style="width: 170px">Customsize Number</label>
+            <label class="form__label" for="">{{$t('box_edit_number.label_customsize_number')}}</label>
             <div class="form__colRight">
               <div class="form__group" style="max-width: 400px">
                 <input
                   type="text"
                   class="form__control"
-                  placeholder="Prefix"
+                  :placeholder="$t('box_edit_number.prefix')"
                   v-model="setter_prefix_number"
                   style="display:block; width: 80px; margin: 0 5px">
                 <div style="display:block; text-align: center; margin: 0 5px"> : </div>
@@ -28,11 +28,10 @@
                   class="form__control"
                   v-model="setter_end_number">
               </div>
-              <div class="form__validate" v-if="!range_number_validate">Error: End number alway more than first number and small than {{max_number}}</div>
             </div>
           </div>
           <div class="form__row">
-            <label class="form__label" for="" style="width: 170px">Style Stop Rolling</label>
+            <label class="form__label" for="">{{$t('box_edit_number.label_style_stop_rolling')}}</label>
             <div class="form__colRight">
               <div class="form__group" style="max-width: 400px">
                 <select class="form__control" v-model="setter_current_style_stop_rolling">
@@ -44,15 +43,15 @@
                     ></option>
                   </select>
               </div>
-              <div class="form__validate" v-if="!range_number_validate">Error: End number alway more than first number and small than {{max_number}}</div>
+              <div class="form__validate" v-if="!range_number_validate">{{$t('box_edit_number.text_validate_number', {'num': max_number})}}</div>
             </div>
           </div>
         </div>
         <div class="box__content--row">
           <div class="box__content--col">
-            <div class="form__textTitle">Container</div>
+            <div class="form__textTitle">{{$t('box_edit_number.title_container')}}</div>
             <div class="form__row">
-              <label class="form__label" for="">Background</label>
+              <label class="form__label" for="">{{$t('box_edit_number.label_container_background')}}</label>
               <div class="form__colRight">
                 <div class="form__group" style="max-width: 155px">
                   <input
@@ -79,7 +78,7 @@
               </div>
             </div>
             <div class="form__row">
-              <label class="form__label" for="">Border</label>
+              <label class="form__label" for="">{{$t('box_edit_number.label_container_border')}}</label>
               <div class="form__colRight">
                 <div class="form__group">
                   <select class="form__control" v-model="container.border_style">
@@ -103,9 +102,9 @@
             </div>
           </div>
           <div class="box__content--col">
-            <div class="form__textTitle">Number</div>
+            <div class="form__textTitle">{{$t('box_edit_number.title_number')}}</div>
               <div class="form__row">
-                <label class="form__label" for="">Background</label>
+                <label class="form__label" for="">{{$t('box_edit_number.label_number_background')}}</label>
                 <div class="form__colRight">
                   <div class="form__group" style="max-width: 155px">
                     <input
@@ -132,7 +131,7 @@
                 </div>
               </div>
               <div class="form__row">
-                <label class="form__label" for="">Border</label>
+                <label class="form__label" for="">{{$t('box_edit_number.label_number_border')}}</label>
                 <div class="form__colRight">
                   <div class="form__group">
                     <select class="form__control" v-model="number.border_style">
@@ -155,7 +154,7 @@
                 </div>
               </div>
               <div class="form__row">
-                <label class="form__label" for="">Font</label>
+                <label class="form__label" for="">{{$t('box_edit_number.label_number_font')}}</label>
                 <div class="form__colRight">
                   <div class="form__group">
                     <select class="form__control" v-model="number.font_style">
@@ -203,7 +202,7 @@
       </div>
     </div>
     <div class="box__footer in-right" v-if="range_number_validate">
-      <Button type="solid" v-on:click="onClickUpdateNumber">Accept</Button>
+      <Button type="solid" v-on:click="onClickUpdateNumber">{{$t('btn_menu.accept')}}</Button>
     </div>
   </div>
 </template>
