@@ -4,5 +4,6 @@ module.exports = {
       entry: 'src/main.js',
       title: 'Lucky Draw 1.0.0'
     }
-  }
+  },
+  filenameHashing: false,
 }
