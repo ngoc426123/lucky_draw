@@ -65,6 +65,8 @@ export default {
     listRollingStopStyle: (vm, data) => (vm.list_rolling_stop_style = data),
     currentRollingStopStyle: (vm, data) => (vm.current_rolling_stop_style = data),
     isPreventFastSpin: (vm, data) => (vm.is_prevent_fast_spin = data),
+    number: (vm, data) => (vm.number = data),
+    container: (vm, data) => (vm.container = data),
   },
 
   actions: {
@@ -120,5 +122,7 @@ export default {
     updateListRollingStopStyle: ({ commit }, data) => commit('listRollingStopStyle', data),
     updateCurrentRollingStopStyle: ({ commit }, data) => commit('currentRollingStopStyle', data),
     updateIsPreventFastSpin: ({ commit }, data) => commit('isPreventFastSpin', data),
+    updateNumber: ({ commit }, data) => commit('number', data),
+    updateContainer: ({ commit }, data) => commit('container', data),
   },
 }

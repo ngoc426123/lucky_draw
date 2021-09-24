@@ -2,7 +2,7 @@
   <button
     class="btn"
     :class="[`btn-${props.type}`, `btn-${props.size}`, props.cstClass]"
-    @click="listeners.click"
+    v-on="listeners"
     v-bind:data-tooltip="props.tooltip"
   >
     <slot/>

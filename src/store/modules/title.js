@@ -28,10 +28,14 @@ export default {
   mutations: {
     isEditTitle: (vm, data) => (vm.is_edit_title = data),
     listFontSize: (vm, data) => (vm.list_font_size = data),
+    textSub: (vm, data) => (vm.text_sub = data),
+    textTitle: (vm, data) => (vm.text_title = data),
   },
 
   actions: {
     updateIsEditTitle: ({ commit }, data) => commit("isEditTitle", data),
     updateListFontSize: ({ commit }, data) => commit("listFontSize", data),
+    updateTextSub: ({ commit }, data) => commit('textSub', data),
+    updateTextTitle: ({ commit }, data) => commit('textTitle', data),
   },
 }

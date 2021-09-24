@@ -5,6 +5,7 @@
 
     <!-- OVERLAY -->
     <TransitionScreen />
+    <notifications position="bottom right"/>
   </div>
 </template>
 

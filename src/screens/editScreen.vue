@@ -16,14 +16,10 @@
       <Button
         type="solid"
         size="md"
-        v-on:click="onClickEditLanguage"
-      >{{$t('btn_menu.language')}}</Button>
-      <Button
-        type="solid"
-        size="md"
         v-on:click="onClickGoLive"
       >{{$t('btn_menu.go_live')}}</Button>
     </div>
+    <MenuSetting />
     <!-- POPUP -->
     <Overlay />
     <BoxEditTitle />
@@ -42,6 +38,7 @@ import BoxEditTitle from "../modules/boxEditTitle.vue";
 import BoxNumber from "../modules/boxNumberEditing.vue";
 import BoxEditNumber from "../modules/boxEditNumber.vue";
 import BoxEditLanguage from "../modules/boxEditLanguage.vue";
+import MenuSetting from "../modules/menuSetting.vue";
 import Overlay from "../modules/overlay.vue";
 import Button from '../components/button.vue';
 
@@ -56,6 +53,7 @@ export default {
     BoxNumber,
     BoxEditNumber,
     BoxEditLanguage,
+    MenuSetting,
     Overlay,
     Button
   },
@@ -87,10 +85,6 @@ export default {
       'openOverlay'
     ]),
 
-    ...mapActions('language', [
-      'updateIsEditLanguage'
-    ]),
-
     async onClickGoLive () {
       this.updateIsTransition(true);
       await new Promise((reslove, reject) => setTimeout(reslove, 200));
@@ -99,15 +93,6 @@ export default {
       await new Promise((reslove, reject) => setTimeout(reslove, 800));
       this.updateIsTransition(false);
     },
-
-    onClickEditLanguage () {
-      if ( !this.is_edit_program ) {
-        return;
-      }
-
-      this.openOverlay(true);
-      this.updateIsEditLanguage(true);
-    }
   }
 };
 </script>
@@ -143,7 +128,7 @@ export default {
 
   &__btnGroup {
     position: fixed;
-    bottom: 80px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;

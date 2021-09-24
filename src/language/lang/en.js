@@ -1,6 +1,6 @@
 export default {
   "en": {
-    "text_editting": "Screen Editting...",
+    "text_editting": "Program Setting...",
     "btn_menu": {
       "accept": "Close",
       "language": "Language",
