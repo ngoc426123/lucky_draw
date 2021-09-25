@@ -1,4 +1,5 @@
 import i18n from '../../language/index'
+import { rand } from '../../utils/helper'
 
 export default {
   state: {
@@ -88,7 +89,7 @@ export default {
 
     getNumber: ({ dispatch, state }) => {
       const { array_number, end_number } = state;
-      const numRandom = array_number[parseInt(Math.random() * (array_number.length - 0) + 0)];
+      const numRandom = array_number[rand(0, array_number.length)];
       const idxRandom = array_number.indexOf(numRandom);
       let finalNumber = numRandom ? numRandom.toString(): '';
 

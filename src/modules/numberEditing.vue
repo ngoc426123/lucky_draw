@@ -6,7 +6,8 @@
       border: `${container.border_style} ${container.border_width}px ${container.border_color}`,
     }"
   >
-    <div class="boxNumber__number"
+    <div
+      class="boxNumber__number"
       v-for="(item, index) in number_slot"
       :key="index.key"
       :style="{

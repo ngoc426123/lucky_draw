@@ -58,6 +58,10 @@ export default {
   },
 
   computed: {
+    ...mapState([
+      'is_transition',
+    ]),
+
     ...mapState('number', [
       'is_rolling',
       'is_prevent_fast_spin',
@@ -66,11 +70,19 @@ export default {
     ...mapState('screen', [
       'is_edit_program',
     ]),
+
+    ...mapState('dashbroad', [
+      'is_show_dashbroad',
+    ]),
   },
 
   methods: {
     ...mapActions([
       'updateIsTransition',
+    ]),
+
+    ...mapActions('overlay', [
+      'openOverlay'
     ]),
 
     ...mapActions('screen', [
@@ -81,24 +93,37 @@ export default {
       'rollNumber',
       'getNumber',
       'clearGame',
-      'updateIsPreventFastSpin'
+      'updateIsPreventFastSpin',
+      'updateIsEditNumber',
     ]),
 
-    async onClickRolling () {
+    ...mapActions('dashbroad', [
+      'updateIsShowDashbroad'
+    ]),
+
+    async handleEventSpinNumber () {
+      this.updateIsPreventFastSpin(true);
+      await new Promise((reslove, reject) => {setTimeout(reslove, 300)});
+      this.getNumber();
+      this.rollNumber(false);
+      await new Promise((reslove, reject) => {setTimeout(reslove, 2500)});
+      this.updateIsPreventFastSpin(false);
+    },
+
+    async handleEventStopNumber () {
+      this.rollNumber(true);
+      this.updateIsPreventFastSpin(true);
+      await new Promise((reslove, reject) => {setTimeout(reslove, 2000)});
+      this.updateIsPreventFastSpin(false);
+    },
+
+    onClickRolling () {
       if ( this.is_rolling ) {
         if ( !this.is_prevent_fast_spin ) {
-          this.updateIsPreventFastSpin(true);
-          await new Promise((reslove, reject) => {setTimeout(reslove, 300)});
-          this.getNumber();
-          this.rollNumber(false);
-          await new Promise((reslove, reject) => {setTimeout(reslove, 2500)});
-          this.updateIsPreventFastSpin(false);
+          this.handleEventSpinNumber();
         }
       } else {
-        this.rollNumber(true);
-        this.updateIsPreventFastSpin(true);
-        await new Promise((reslove, reject) => {setTimeout(reslove, 2000)});
-        this.updateIsPreventFastSpin(false);
+        this.handleEventStopNumber();
       }
     },
 
@@ -111,6 +136,34 @@ export default {
       await new Promise((reslove, reject) => setTimeout(reslove, 800));
       this.updateIsTransition(false);
     },
+  },
+  
+  mounted () {
+    document.addEventListener('keyup', async (key) => {
+      if ( this.is_edit_program && this.is_transition ) {
+        return;
+      }
+
+      if ( key.key === 'Enter' ) {
+        if ( this.is_rolling  ) {
+          if ( !this.is_prevent_fast_spin ) {
+            this.handleEventSpinNumber();
+          }
+        } else {
+          this.handleEventStopNumber();
+        }
+      }
+
+      if ( key.key === 'F10' && key.ctrlKey ) {
+        if ( !this.is_show_dashbroad ) {
+          this.openOverlay(true);
+          this.updateIsShowDashbroad(true);
+        } else {
+          this.openOverlay(false);
+          this.updateIsShowDashbroad(false);
+        }
+      }
+    });
   }
 };
 </script>

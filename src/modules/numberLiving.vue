@@ -34,6 +34,7 @@
 
 <script>
 import gsap from 'gsap'
+import { rand } from '../utils/helper'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Number',
@@ -90,6 +91,7 @@ export default {
         const index = vm.current_number[idx];
         const angle = vm.array_offset_number[index];
         const pos = angle;
+        const posEdge = angle - rand(45, 90);
         let delay = null;
 
         switch (vm.current_rolling_stop_style) {
@@ -98,23 +100,23 @@ export default {
             break;
 
           case 1:
-            delay = idx * 700;
+            delay = idx * 500;
             break;
 
           case 2:
-            delay = (vm.numberLength - 1 - idx) * 700;
+            delay = (vm.numberLength - 1 - idx) * 500;
             break;
 
           case 3:
-            delay = parseInt(Math.random() * (1000 - 300) + 300);
+            delay = rand(300, 700);
             break;
 
           case 4:
-            delay = Math.sin( Math.PI* ( idx / vm.numberLength )) * 700;
+            delay = Math.sin( Math.PI* ( idx / vm.numberLength )) * 500;
             break;
 
           case 5:
-            delay = 700;
+            delay = 500;
             break;
         
           default:
@@ -124,7 +126,7 @@ export default {
         await new Promise((res, rej) => setTimeout(res, delay));
         item.pause();
         eleNumber[idx].classList.remove('rolling');
-        gsap.to(eleRotation[idx], { rotateX: pos, duration: 2 });
+        gsap.fromTo(eleRotation[idx], { rotateX: posEdge }, { rotateX: pos, duration: 2 });
       });
 
       this.addLuckyNumber(dashbroad);

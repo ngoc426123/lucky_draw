@@ -1,7 +1,7 @@
 <template>
   <div
     class="background"
-    :style="{ background: bgComputed }"
+    :style="backgroundComputed"
     v-on:click="onClickEditBackground"
   ></div>
 </template>
@@ -24,8 +24,8 @@ export default {
       'is_edit_program',
     ]),
 
-    bgComputed: ({ first_color, second_color, angle, background }) => {
-      return !background ? `linear-gradient(${angle}deg, ${second_color} 0%, ${first_color} 100%)` : `url(${background})`;
+    backgroundComputed: ({ first_color, second_color, angle, background }) => {
+      return !background ? { 'background': `linear-gradient(${angle}deg, ${second_color} 0%, ${first_color} 100%)` } : { 'background-image': `url(${background})` };
     }
   },
 
@@ -58,7 +58,7 @@ export default {
   bottom: 0;
   left: 0;
   background-position: center;
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
   z-index: 1;
 
