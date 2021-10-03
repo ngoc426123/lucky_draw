@@ -51,5 +51,8 @@ export default {
       "title_lucky_number": "Số may mắn",
       "title_time": "Thời gian",
     },
+    "out_screen": {
+      "title": "Chương trình tạm dừng, nhấp chuột vô bất cứ đâu để chạy lại."
+    }
   }
 }

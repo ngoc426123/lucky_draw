@@ -5,6 +5,7 @@
 
     <!-- OVERLAY -->
     <TransitionScreen />
+    <OverlayOutScreen />
     <notifications position="bottom right"/>
   </div>
 </template>
@@ -14,6 +15,7 @@ import { mapState, mapActions } from 'vuex';
 import EditScreen from "./screens/editScreen.vue";
 import LiveScreen from "./screens/liveScreen.vue";
 import TransitionScreen from "./modules/transitionScreen.vue";
+import OverlayOutScreen from "./modules/overlayOutScreen.vue";
 
 export default {
   name: "App",
@@ -22,11 +24,16 @@ export default {
     EditScreen,
     LiveScreen,
     TransitionScreen,
+    OverlayOutScreen
   },
 
   computed: {
     ...mapState('language', [
       'current_language'
+    ]),
+
+    ...mapState('outscreen', [
+      'is_out_screen'
     ]),
   },
   
@@ -37,6 +44,10 @@ export default {
 
     ...mapActions('number', [
       'updateListRollingStopStyle'
+    ]),
+
+    ...mapActions('outscreen', [
+      'updateIsOutScreen'
     ]),
 
     changeLanguage (value) {
@@ -50,6 +61,10 @@ export default {
   },
 
   async mounted () {
+    window.addEventListener('blur', () => {
+      this.updateIsOutScreen(true);
+    });
+
     await new Promise((reslove, reject)=> { setTimeout(reslove, 1000) });
     this.updateIsTransition(false);
   },

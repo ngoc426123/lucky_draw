@@ -51,5 +51,8 @@ export default {
       "title_lucky_number": "Lucky number",
       "title_time": "Time",
     },
+    "out_screen": {
+      "title": "The Program is pause, click anywhere to play again."
+    }
   }
 }

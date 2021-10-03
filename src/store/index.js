@@ -10,6 +10,7 @@ import number from './modules/number'
 import dashbroad from './modules/dashbroad'
 import language from './modules/language'
 import screen from './modules/screen'
+import outscreen from './modules/outscreen'
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ const modules = {
   dashbroad,
   language,
   screen,
+  outscreen
 }
 
 for (let mod in modules) {

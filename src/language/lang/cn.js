@@ -51,5 +51,8 @@ export default {
       "title_lucky_number": "幸运数字",
       "title_time": "时间",
     },
+    "out_screen": {
+      "title": "节目暂停，点击任意位置再次播放。"
+    }
   }
 }
